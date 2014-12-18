@@ -30,8 +30,13 @@ public class MyTest {
      */
     public static void main(String[] args) throws AWTException, InterruptedException {
         Socket client = null;
+        PointerController mover = new PointerController();
+        RemoteCommand remoteCommand = null;
+        PointerController pointerController = null;
+        
+                    
         try {
-            String serverName = "localhost";
+            String serverName = "160.85.133.21";
             int port = 10101;
 
             System.out.println("Connecting to " + serverName + " on port " + port);
@@ -43,12 +48,29 @@ public class MyTest {
             ObjectInputStream objectStream = new ObjectInputStream(inFromServer);
 
             while (true) {
-                Object receivedObject= objectStream.readObject();
-                if(receivedObject != null){
-                    Point recievedPoint = (Point)receivedObject;
-                    System.out.println(recievedPoint);
-                    PointerMover mover = new PointerMover();
-                    mover.movePointer(recievedPoint);
+                remoteCommand = (RemoteCommand)objectStream.readObject();
+                if(remoteCommand != null){
+                    Point currentPosition = remoteCommand.getPosition();
+                    switch(remoteCommand.getCommand()){
+                        case "move":
+                            pointerController.setCurrentPosition(currentPosition);
+                            pointerController.movePointer();
+                            break;
+                        case "clickLeft":
+                            pointerController.setCurrentPosition(currentPosition);
+                            pointerController.movePointer();
+                            break;
+                        case "clickRight":
+                            pointerController.setCurrentPosition(currentPosition);
+                            pointerController.movePointer();
+                            break;
+                        case "clickMiddle":
+                            pointerController.setCurrentPosition(currentPosition);
+                            pointerController.movePointer();
+                            break;
+                        default:
+                            break;
+                        }
                 }else{
                     return;
                 }

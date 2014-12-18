@@ -7,13 +7,10 @@ package mytest;
 
 import java.util.List;
 import java.awt.Point;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class PointerServer extends Thread {
 
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
 
     public PointerServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
@@ -46,7 +43,7 @@ public class PointerServer extends Thread {
                 System.out.println("Get ready to record!");
                 Thread.sleep(5000);
                 System.out.println("Recording...");
-                for (int j = 0; j < 200; j++) {
+                for (int j = 0; j < 10000; j++) {
                     PointerLocator pointerLocator = new PointerLocator();
                     points.add(pointerLocator.getLocation());
                     Thread.sleep(10);
@@ -54,7 +51,7 @@ public class PointerServer extends Thread {
                 System.out.println("Done recording");
                 Thread.sleep(1000);
                 System.out.println("Sending recording...");
-                for (int i = 0; i < 200; i++) {
+                for (int i = 0; i < 10000; i++) {
                     objectStream.writeObject(points.get(i));
                     Thread.sleep(10);
                 }
