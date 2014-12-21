@@ -13,8 +13,6 @@ import java.awt.Point;
  * @author alex
  */
 public class PointerLocator {
-    private Point location;
-    
     public Point getLocation(){
         return MouseInfo.getPointerInfo().getLocation();
     }

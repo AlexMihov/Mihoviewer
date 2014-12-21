@@ -6,14 +6,16 @@
 package mytest;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  * Class which represents a command given by the PC which is controlling
  * @author Alex Mihov
  */
 
-public class RemoteCommand {
-    private final String command;
+public class RemoteCommand implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private final String command;
     private final Point position;
     /**
      * The constructor takes two arguments which can't be changed afterwards

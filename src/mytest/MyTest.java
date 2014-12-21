@@ -7,12 +7,9 @@ package mytest;
 
 import java.awt.AWTException;
 import java.awt.Point;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +27,11 @@ public class MyTest {
      */
     public static void main(String[] args) throws AWTException, InterruptedException {
         Socket client = null;
-        PointerController mover = new PointerController();
-        RemoteCommand remoteCommand = null;
-        PointerController pointerController = null;
-        
-                    
+        RemoteCommand remoteCommand = new RemoteCommand("move", new Point(0,0));
+        PointerController pointerController = new PointerController();
+                  
         try {
-            String serverName = "160.85.133.21";
+            String serverName = "localhost";
             int port = 10101;
 
             System.out.println("Connecting to " + serverName + " on port " + port);
@@ -59,19 +54,23 @@ public class MyTest {
                         case "clickLeft":
                             pointerController.setCurrentPosition(currentPosition);
                             pointerController.movePointer();
+                            pointerController.clickLeft();
                             break;
                         case "clickRight":
                             pointerController.setCurrentPosition(currentPosition);
                             pointerController.movePointer();
+                            pointerController.clickRight();
                             break;
                         case "clickMiddle":
                             pointerController.setCurrentPosition(currentPosition);
                             pointerController.movePointer();
+                            pointerController.clickMiddle();
                             break;
                         default:
                             break;
                         }
                 }else{
+                    System.out.println("I fucked up");
                     return;
                 }
             }

@@ -6,7 +6,6 @@
 package mytest;
 
 import java.awt.AWTException;
-import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
@@ -31,6 +30,14 @@ public class PointerController {
         ROBOT.mouseRelease(InputEvent.BUTTON1_MASK);
     }
     
+    public void clickRight(){
+        ROBOT.mousePress(InputEvent.BUTTON3_MASK);
+        ROBOT.mouseRelease(InputEvent.BUTTON3_MASK);
+    }
+    public void clickMiddle(){
+        ROBOT.mousePress(InputEvent.BUTTON2_MASK);
+        ROBOT.mouseRelease(InputEvent.BUTTON2_MASK);
+    }
     public void setCurrentPosition(Point newPosition){
         this.currentPosition = newPosition;
     }
